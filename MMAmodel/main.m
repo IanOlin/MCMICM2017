@@ -21,3 +21,24 @@
 
 (* ::Input::Initialization:: *)
 SetDirectory[NotebookDirectory[]]
+ClearAll[t]
+
+
+(* ::Input::Initialization:: *)
+initialConds={lake1Vol[0]==1000(*,lake1inflow[t_/;t\[LessEqual]0]\[Equal]10*)};
+behaviors={lake1Vol'[t]==lake1inflow[t]-lake1outflow[t]};
+
+
+(* ::Input::Initialization:: *)
+lakeEqns={lake1Height[t]==lake1Vol[t]/100};
+
+
+(* ::Input::Initialization:: *)
+inflows={lake1inflow[t]==10+3Sin[t*2 Pi / 365]};
+
+
+(* ::Input::Initialization:: *)
+damPolicy={lake1outflow[t]==lake1Height[t]};
+
+
+
