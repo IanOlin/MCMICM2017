@@ -25,24 +25,13 @@ ClearAll[t]
 
 
 (* ::Input::Initialization:: *)
-initialConds={lake1Vol[0]==1000000000000(*,lake1inflow[t_/;t\[LessEqual]0]\[Equal]10*)};
+initialConds={lake1Vol[0]==2.6239857119877324`*^12};
 behaviors={lake1Vol'[t]==lake1inflow[t]-lake1outflow[t]};
 
 
 (* ::Input::Initialization:: *)
-With[{surfacearea =N@QuantityMagnitude[UnitConvert[ \!\(\*
-NamespaceBox["LinguisticAssistant",
-DynamicModuleBox[{Typeset`query$$ = "2085 mi^2", Typeset`boxes$$ = TemplateBox[{"2085", RowBox[{SuperscriptBox["\"mi\"", "2"]}], "miles squared", SuperscriptBox["\"Miles\"", "2"]}, "Quantity", SyntaxForm -> Mod], Typeset`allassumptions$$ = {}, Typeset`assumptions$$ = {}, Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {"Online" -> True, "Allowed" -> True, "mparse.jsp" -> 0.788038`6.348092153615485, "Messages" -> {}}}, 
-DynamicBox[ToBoxes[AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, Dynamic[Typeset`query$$], Dynamic[Typeset`boxes$$], Dynamic[Typeset`allassumptions$$], Dynamic[Typeset`assumptions$$], Dynamic[Typeset`open$$], Dynamic[Typeset`querystate$$]], StandardForm],
-ImageSizeCache->{113., {9., 21.}},
-TrackedSymbols:>{Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
-DynamicModuleValues:>{},
-UndoTrackedVariables:>{Typeset`open$$}],
-BaseStyle->{"Deploy"},
-DeleteWithContents->True,
-Editable->False,
-SelectWithContents->True]\),"m^2"]]},
-lakeEqns={lake1Height[t]==3*lake1Vol[t]/surfacearea}];
+With[{surfacearea =N@QuantityMagnitude[UnitConvert[ Quantity[2085,("Miles")^2],"m^2"]]},
+lakeEqns={lake1Height[t]==lake1Vol[t]/surfacearea}];
 
 
 (* ::Input::Initialization:: *)
@@ -50,7 +39,9 @@ inflows={lake1inflow[t]==flow20112012[startDate+Quantity[t,"Days"]]};
 
 
 (* ::Input::Initialization:: *)
-damPolicy={lake1outflow[t]==Cos[t/365]300000000};
+damOutflow[t_]:=80000000
+zambeziOutflowFraction = 0.86
+damPolicy={lake1outflow[t]==damOutflow[t]/zambeziOutflowFraction};(* m^3/day *)
 
 
 b`raw=Import["../Data/Bathymetry.asc","Data"];
