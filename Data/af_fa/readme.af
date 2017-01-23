@@ -1,0 +1,37 @@
+The African HYDRO1k data set is made up of six raster and
+two vector layers.  The projection and georeferencing information
+for the African data set include:
+
+Number of rows = 9194
+Number of columns = 8736
+
+XY corner coordinates (center of pixel):
+
+   Lower left:  -4368500.000, -5044500.000
+   Upper left:  -4368500.000, 4149500.000
+   Upper right: 4367500.000, 4149500.000
+   Lower right: 4367500.000, -5044500.000
+
+Projection used:  Lambert Azimuthal Equal Area
+                  Units = meters
+                  Pixel Size = 1000 meters
+                  Radius of Sphere of Influence = 6,370,997 meters
+                  Longitude of Origin = 20 00 00E
+                  Latitude of Origin = 5 00 00N
+                  False Easting = 0.0
+                  False Northing = 0.0
+
+Additional information can be found in the README file distributed
+with the HYDRO1k data set.
+
+NOTE: The slope, aspect and CTI layers are distributed as
+integer data. However, in order to carry as much information as
+possible, the floating point data were multiplied by 100 and then
+converted to integer. The "z" units in the raster layers are then 0.01. For
+example, a slope value of 23.42 is represented in the slope data layer as
+2342.
+
+ADDITIONAL NOTE: The data layers for the African HYDRO1k dataset were
+replaced on June 12, 2000 to incorporate the changes to the slope, aspect
+and CTI layers noted above and to include CTI statistics on the basins
+layer.
