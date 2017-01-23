@@ -34,7 +34,7 @@ With[{surfacearea =N@QuantityMagnitude[UnitConvert[ \!\(\*
 NamespaceBox["LinguisticAssistant",
 DynamicModuleBox[{Typeset`query$$ = "2085 mi^2", Typeset`boxes$$ = TemplateBox[{"2085", RowBox[{SuperscriptBox["\"mi\"", "2"]}], "miles squared", SuperscriptBox["\"Miles\"", "2"]}, "Quantity", SyntaxForm -> Mod], Typeset`allassumptions$$ = {}, Typeset`assumptions$$ = {}, Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {"Online" -> True, "Allowed" -> True, "mparse.jsp" -> 0.788038`6.348092153615485, "Messages" -> {}}}, 
 DynamicBox[ToBoxes[AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, Dynamic[Typeset`query$$], Dynamic[Typeset`boxes$$], Dynamic[Typeset`allassumptions$$], Dynamic[Typeset`assumptions$$], Dynamic[Typeset`open$$], Dynamic[Typeset`querystate$$]], StandardForm],
-ImageSizeCache->{114., {9., 22.}},
+ImageSizeCache->{113., {9., 21.}},
 TrackedSymbols:>{Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
 DynamicModuleValues:>{},
 UndoTrackedVariables:>{Typeset`open$$}],
@@ -42,7 +42,7 @@ BaseStyle->{"Deploy"},
 DeleteWithContents->True,
 Editable->False,
 SelectWithContents->True]\),"m^2"]]},
-lakeEqns={lake1Height[t]==lake1Vol[t]/surfacearea}];
+lakeEqns={lake1Height[t]==3*lake1Vol[t]/surfacearea}];
 
 
 (* ::Input::Initialization:: *)
@@ -50,7 +50,17 @@ inflows={lake1inflow[t]==flow20112012[startDate+Quantity[t,"Days"]]};
 
 
 (* ::Input::Initialization:: *)
-damPolicy={lake1outflow[t]==0(*lake1Height[t]*100000*)};
+damPolicy={lake1outflow[t]==Cos[t/365]300000000};
+
+
+b`raw=Import["../Data/Bathymetry.asc","Data"];
+b`d=ToExpression/@StringSplit[b`raw[[8;;]]];
+b`h=AssociationThread@@MapAt[ToExpression,Transpose@StringSplit@b`raw[[;;7]],2];
+ArrayPlot[b`d, ImageSize->Full]
+GeoGraphics[GeoBoundsRegion[{
+{b`h[["yllcorner"]],b`h[["yllcorner"]]+(b`h[["dy"]]*b`h[["nrows"]])},
+{b`h[["xllcorner"]],b`h[["xllcorner"]]+(b`h[["dx"]]*b`h[["ncols"]])}
+}]]
 
 
 
