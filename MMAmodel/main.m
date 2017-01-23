@@ -25,20 +25,32 @@ ClearAll[t]
 
 
 (* ::Input::Initialization:: *)
-initialConds={lake1Vol[0]==1000(*,lake1inflow[t_/;t\[LessEqual]0]\[Equal]10*)};
+initialConds={lake1Vol[0]==1000000000000(*,lake1inflow[t_/;t\[LessEqual]0]\[Equal]10*)};
 behaviors={lake1Vol'[t]==lake1inflow[t]-lake1outflow[t]};
 
 
 (* ::Input::Initialization:: *)
-lakeEqns={lake1Height[t]==lake1Vol[t]/100};
+With[{surfacearea =N@QuantityMagnitude[UnitConvert[ \!\(\*
+NamespaceBox["LinguisticAssistant",
+DynamicModuleBox[{Typeset`query$$ = "2085 mi^2", Typeset`boxes$$ = TemplateBox[{"2085", RowBox[{SuperscriptBox["\"mi\"", "2"]}], "miles squared", SuperscriptBox["\"Miles\"", "2"]}, "Quantity", SyntaxForm -> Mod], Typeset`allassumptions$$ = {}, Typeset`assumptions$$ = {}, Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {"Online" -> True, "Allowed" -> True, "mparse.jsp" -> 0.788038`6.348092153615485, "Messages" -> {}}}, 
+DynamicBox[ToBoxes[AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, Dynamic[Typeset`query$$], Dynamic[Typeset`boxes$$], Dynamic[Typeset`allassumptions$$], Dynamic[Typeset`assumptions$$], Dynamic[Typeset`open$$], Dynamic[Typeset`querystate$$]], StandardForm],
+ImageSizeCache->{114., {9., 22.}},
+TrackedSymbols:>{Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+DynamicModuleValues:>{},
+UndoTrackedVariables:>{Typeset`open$$}],
+BaseStyle->{"Deploy"},
+DeleteWithContents->True,
+Editable->False,
+SelectWithContents->True]\),"m^2"]]},
+lakeEqns={lake1Height[t]==lake1Vol[t]/surfacearea}];
 
 
 (* ::Input::Initialization:: *)
-inflows={lake1inflow[t]==10+3Sin[t*2 Pi / 365]};
+inflows={lake1inflow[t]==flow20112012[startDate+Quantity[t,"Days"]]};
 
 
 (* ::Input::Initialization:: *)
-damPolicy={lake1outflow[t]==lake1Height[t]};
+damPolicy={lake1outflow[t]==0(*lake1Height[t]*100000*)};
 
 
 
